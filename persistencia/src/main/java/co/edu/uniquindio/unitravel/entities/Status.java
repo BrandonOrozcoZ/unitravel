@@ -5,6 +5,7 @@ public enum Status {
     Ocupada,
     Disponible,
     Mantenimiento,
-    FueraDeServicio;
+    FueraDeServicio,
+    Reservada;
 
 }

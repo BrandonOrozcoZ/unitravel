@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -27,12 +30,29 @@ public class Comment implements Serializable {
     @Column(length = 100, nullable = false)
     private String comment;
 
+    @PositiveOrZero
     @Column(nullable = false, precision = 1, scale = 1)
+    @Min(0) @Max(5)
     private float rating;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar date;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Hotel hotelComment;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Client clientUser;
+
+    public Comment(int code, String comment, float rating, Calendar date, Hotel hotelComment, Client clientUser) {
+        this.code = code;
+        this.comment = comment;
+        this.rating = rating;
+        this.date = date;
+        this.hotelComment = hotelComment;
+        this.clientUser = clientUser;
+    }
 }

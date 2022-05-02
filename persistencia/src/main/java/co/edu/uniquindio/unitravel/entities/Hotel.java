@@ -5,11 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @NoArgsConstructor
@@ -29,10 +31,54 @@ public class Hotel implements Serializable {
     @Column(length = 200, nullable = false)
     private String address;
 
-    private String telephone;
+    @ElementCollection
+    @Column(nullable = false)
+    private Map<String, String> telephone;
 
+    @PositiveOrZero
     @Column(nullable = false, precision = 1, scale = 1)
+    @Min(0) @Max(5)
     private float stars;
 
+    @OneToMany(mappedBy = "hotel")
+    private List<Bedroom> bedrooms;
 
+    @OneToMany(mappedBy = "hotelComment")
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "hotelPhotos")
+    private List<Photo> Photos;
+
+    @OneToMany(mappedBy = "favorite")
+    private List<Favorite> favorites;
+
+    @OneToOne(mappedBy = "hotelFeatured")
+    private Featured featured;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Manager manager;
+
+    @ManyToMany(mappedBy = "hotels")
+    private List<HotelFeature> features;
+
+
+    public Hotel(int code, String name, String address, Map<String, String> telephone, float stars, List<Bedroom> bedrooms, List<Comment> comments, List<Photo> photos, List<Favorite> favorites, City city, Manager manager, List<HotelFeature> features) {
+        this.code = code;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.stars = stars;
+        this.bedrooms = bedrooms;
+        this.comments = comments;
+        Photos = photos;
+        this.favorites = favorites;
+        this.city = city;
+        this.manager = manager;
+        this.features = features;
+    }
 }

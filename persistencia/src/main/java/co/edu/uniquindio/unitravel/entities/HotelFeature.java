@@ -5,20 +5,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class HotelTelephone implements Serializable {
+public class HotelFeature implements Serializable{
 
     @Id
+    @GeneratedValue
     @EqualsAndHashCode.Include
+    private int code;
+
+    @Column(nullable = false)
     private String description;
+
+    @ManyToMany
+    private List<Hotel> hotels;
 
 }

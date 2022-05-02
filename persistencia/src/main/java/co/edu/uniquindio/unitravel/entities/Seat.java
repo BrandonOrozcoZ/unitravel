@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -18,6 +19,7 @@ import java.io.Serializable;
 public class Seat implements Serializable {
 
     @Id
+    @GeneratedValue
     @EqualsAndHashCode.Include
     private int code;
 
@@ -25,6 +27,20 @@ public class Seat implements Serializable {
     private String position;
 
     @Column(nullable = false, scale = 2)
+    @Positive
     private float price;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Flight flight;
+
+    @ManyToMany(mappedBy = "seats")
+    private List<Reservation> reservations;
+
+    public Seat(int code, String position, float price, Flight flight) {
+        this.code = code;
+        this.position = position;
+        this.price = price;
+        this.flight = flight;
+    }
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Entity
@@ -18,6 +19,10 @@ public class Featured implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
-    private int code;
+    @OneToOne
+    private Hotel hotelFeatured;
 
+    public Featured(Hotel hotelFeatured) {
+        this.hotelFeatured = hotelFeatured;
+    }
 }

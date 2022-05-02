@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -16,11 +17,18 @@ import java.io.Serializable;
 public class Bed implements Serializable {
 
     @Id
+    @GeneratedValue
     @EqualsAndHashCode.Include
     private int code;
 
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    @ManyToMany
+    private List<Bedroom> bedrooms;
 
+    public Bed(int code, Type type) {
+        this.code = code;
+        this.type = type;
+    }
 }

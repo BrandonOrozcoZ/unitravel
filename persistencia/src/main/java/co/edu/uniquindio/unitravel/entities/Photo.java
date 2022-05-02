@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -25,6 +22,12 @@ public class Photo implements Serializable {
 
     @Column(nullable = false)
     private String url;
+
+    @ManyToOne
+    private Hotel hotelPhotos;
+
+    @ManyToOne
+    private Bedroom bedroomPhotos;
 
     public Photo(int code, String url) {
         this.code = code;
