@@ -25,9 +25,9 @@ public class RoomFeature implements Serializable {
     private String description;
 
     @ManyToMany
-    private List<Bedroom> roomsFeatures;
+    private List<Room> roomsFeatures;
 
-    public RoomFeature(int code, String description, List<Bedroom> roomsFeatures) {
+    public RoomFeature(int code, String description, List<Room> roomsFeatures) {
         this.code = code;
         this.description = description;
         this.roomsFeatures = roomsFeatures;

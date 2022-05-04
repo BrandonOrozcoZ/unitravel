@@ -27,7 +27,7 @@ public class Photo implements Serializable {
     private Hotel hotelPhotos;
 
     @ManyToOne
-    private Bedroom bedroomPhotos;
+    private Room roomPhotos;
 
     public Photo(int code, String url) {
         this.code = code;

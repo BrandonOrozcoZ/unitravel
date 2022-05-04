@@ -25,7 +25,7 @@ public class Bed implements Serializable {
     private Type type;
 
     @ManyToMany
-    private List<Bedroom> bedrooms;
+    private List<Room> rooms;
 
     public Bed(int code, Type type) {
         this.code = code;

@@ -34,8 +34,8 @@ public class Seat implements Serializable {
     @JoinColumn(nullable = false)
     private Flight flight;
 
-    @ManyToMany(mappedBy = "seats")
-    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "seat")
+    private List<Reservation_Seat> reservations;
 
     public Seat(int code, String position, float price, Flight flight) {
         this.code = code;

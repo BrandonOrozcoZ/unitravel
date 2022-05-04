@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
@@ -38,27 +39,28 @@ public class Reservation implements Serializable {
     private Calendar endDate;
 
     @Column(name = "total_price", nullable = false, scale = 2)
-    @Positive
+    @PositiveOrZero
     private float totalPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private int numPeople;
 
-    @ManyToMany
-    private List<Seat> seats;
 
-    @ManyToMany
-    private List<Bedroom> reservedBedrooms;
+    @OneToMany(mappedBy = "reservation")
+    private List<Reservation_Room> rooms;
+
+    @OneToMany(mappedBy = "reservationSeat")
+    private List<Reservation_Seat> seats;
 
     @ManyToOne
     private Client client;
 
-    public Reservation(int code, Calendar reserveDate, Calendar startDate, Calendar endDate, float totalPrice, Status status, int numPeople, List<Bedroom> reservedBedrooms, Client client) {
+    public Reservation(int code, Calendar reserveDate, Calendar startDate, Calendar endDate, float totalPrice, Status status, int numPeople, List<Reservation_Room> rooms, Client client) {
         this.code = code;
         this.reserveDate = reserveDate;
         this.startDate = startDate;
@@ -66,7 +68,7 @@ public class Reservation implements Serializable {
         this.totalPrice = totalPrice;
         this.status = status;
         this.numPeople = numPeople;
-        this.reservedBedrooms = reservedBedrooms;
+        this.rooms = rooms;
         this.client = client;
     }
 }

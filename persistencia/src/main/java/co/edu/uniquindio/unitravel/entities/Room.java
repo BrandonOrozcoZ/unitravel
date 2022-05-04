@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Bedroom implements Serializable {
+public class Room implements Serializable {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class Bedroom implements Serializable {
     @Positive
     private int capacity;
 
-    @OneToMany(mappedBy = "bedroomPhotos")
+    @OneToMany(mappedBy = "roomPhotos")
     private List<Photo> photos;
 
     @ManyToOne
@@ -40,13 +40,13 @@ public class Bedroom implements Serializable {
     @ManyToMany(mappedBy = "roomsFeatures")
     private List<RoomFeature> features;
 
-    @ManyToMany(mappedBy = "bedrooms")
+    @ManyToMany(mappedBy = "rooms")
     private List<Bed> beds;
 
-    @ManyToMany(mappedBy = "reservedBedrooms")
-    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "room")
+    private List<Reservation_Room> reservations;
 
-    public Bedroom(int number, float price, int capacity, List<Photo> photos, Hotel hotel, List<RoomFeature> features, List<Bed> beds) {
+    public Room(int number, float price, int capacity, List<Photo> photos, Hotel hotel, List<RoomFeature> features, List<Bed> beds) {
         this.number = number;
         this.price = price;
         this.capacity = capacity;

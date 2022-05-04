@@ -2,10 +2,7 @@ package co.edu.uniquindio.unitravel.entities;
 
 import lombok.*;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
@@ -26,8 +23,8 @@ public class Client extends Person implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "clientfavorite")
-    private List<Favorite> favorites;
+    @ManyToMany
+    private List<Hotel> favorites;
 
     @ElementCollection
     private Map<String, String> telephone;

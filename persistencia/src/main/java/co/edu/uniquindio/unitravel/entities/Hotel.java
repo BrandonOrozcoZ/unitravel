@@ -41,7 +41,7 @@ public class Hotel implements Serializable {
     private float stars;
 
     @OneToMany(mappedBy = "hotel")
-    private List<Bedroom> bedrooms;
+    private List<Room> rooms;
 
     @OneToMany(mappedBy = "hotelComment")
     private List<Comment> comments;
@@ -49,8 +49,8 @@ public class Hotel implements Serializable {
     @OneToMany(mappedBy = "hotelPhotos")
     private List<Photo> Photos;
 
-    @OneToMany(mappedBy = "favorite")
-    private List<Favorite> favorites;
+    @ManyToMany(mappedBy = "favorites")
+    private List<Client> clients;
 
     @OneToOne(mappedBy = "hotelFeatured")
     private Featured featured;
@@ -67,16 +67,16 @@ public class Hotel implements Serializable {
     private List<HotelFeature> features;
 
 
-    public Hotel(int code, String name, String address, Map<String, String> telephone, float stars, List<Bedroom> bedrooms, List<Comment> comments, List<Photo> photos, List<Favorite> favorites, City city, Manager manager, List<HotelFeature> features) {
+    public Hotel(int code, String name, String address, Map<String, String> telephone, float stars, List<Room> rooms, List<Comment> comments, List<Photo> photos, List<Client> clients, City city, Manager manager, List<HotelFeature> features) {
         this.code = code;
         this.name = name;
         this.address = address;
         this.telephone = telephone;
         this.stars = stars;
-        this.bedrooms = bedrooms;
+        this.rooms = rooms;
         this.comments = comments;
         Photos = photos;
-        this.favorites = favorites;
+        this.clients = clients;
         this.city = city;
         this.manager = manager;
         this.features = features;
