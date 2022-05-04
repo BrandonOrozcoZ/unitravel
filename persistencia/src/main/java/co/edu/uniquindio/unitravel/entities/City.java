@@ -19,7 +19,7 @@ public class City implements Serializable {
     @Id
     @GeneratedValue
     @EqualsAndHashCode.Include
-    private int code;
+    private Integer code;
 
     @Column(length = 100, nullable = false)
     private String name;

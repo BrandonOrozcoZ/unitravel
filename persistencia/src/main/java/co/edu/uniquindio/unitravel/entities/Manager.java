@@ -20,8 +20,7 @@ public class Manager extends Person implements Serializable {
     @OneToMany(mappedBy = "manager")
     private List<Hotel> hotels;
 
-    public Manager(String id, String name, @Email String email, String password, List<Hotel> hotels) {
+    public Manager(String id, String name, @Email String email, String password) {
         super(id, name, email, password);
-        this.hotels = hotels;
     }
 }

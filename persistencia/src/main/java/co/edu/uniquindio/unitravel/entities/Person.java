@@ -10,12 +10,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person implements Serializable {
     @Id
-    @GeneratedValue
     @EqualsAndHashCode.Include
     private String id;
 
