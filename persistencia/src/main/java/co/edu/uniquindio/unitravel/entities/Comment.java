@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -16,16 +13,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comment implements Serializable {
 
     @Id
     @GeneratedValue
     @EqualsAndHashCode.Include
-    private int code;
+    private Integer code;
 
     @Column(length = 100, nullable = false)
     private String comment;
@@ -47,12 +46,4 @@ public class Comment implements Serializable {
     @JoinColumn(nullable = false)
     private Client clientUser;
 
-    public Comment(int code, String comment, float rating, Calendar date, Hotel hotelComment, Client clientUser) {
-        this.code = code;
-        this.comment = comment;
-        this.rating = rating;
-        this.date = date;
-        this.hotelComment = hotelComment;
-        this.clientUser = clientUser;
-    }
 }

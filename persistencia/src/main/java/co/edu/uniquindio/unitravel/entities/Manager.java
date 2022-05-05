@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,9 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString(callSuper = true)
 public class Manager extends Person implements Serializable {
 
     @OneToMany(mappedBy = "manager")
+    @ToString.Exclude
     private List<Hotel> hotels;
 
     public Manager(String id, String name, @Email String email, String password) {

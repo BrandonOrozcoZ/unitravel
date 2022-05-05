@@ -10,9 +10,10 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservation_Room implements Serializable {
 
     @Id

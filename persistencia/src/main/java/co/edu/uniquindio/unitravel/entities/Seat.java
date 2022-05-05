@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
@@ -12,9 +9,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Seat implements Serializable {
 
@@ -35,6 +34,7 @@ public class Seat implements Serializable {
     private Flight flight;
 
     @OneToMany(mappedBy = "seat")
+    @ToString.Exclude
     private List<Reservation_Seat> reservations;
 
     public Seat(int code, String position, float price, Flight flight) {

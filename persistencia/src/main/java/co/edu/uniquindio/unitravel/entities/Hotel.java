@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -14,9 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Hotel implements Serializable {
 
@@ -41,19 +40,23 @@ public class Hotel implements Serializable {
     private float stars;
 
     @OneToMany(mappedBy = "hotel")
+    @ToString.Exclude
     private List<Room> rooms;
 
     @OneToMany(mappedBy = "hotelComment")
+    @ToString.Exclude
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "hotelPhotos")
+    @ToString.Exclude
     private List<Photo> Photos;
 
     @ManyToMany(mappedBy = "favorites")
+    @ToString.Exclude
     private List<Client> clients;
 
-    @OneToOne(mappedBy = "hotelFeatured")
-    private Featured featured;
+    @Column(nullable = false)
+    private int isFeatured;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -64,6 +67,7 @@ public class Hotel implements Serializable {
     private Manager manager;
 
     @ManyToMany(mappedBy = "hotels")
+    @ToString.Exclude
     private List<HotelFeature> features;
 
 

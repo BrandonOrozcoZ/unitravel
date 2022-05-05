@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Flight implements Serializable {
 
@@ -28,6 +29,7 @@ public class Flight implements Serializable {
     private Airline airline;
 
     @OneToMany(mappedBy = "flight")
+    @ToString.Exclude
     private List<Seat> seats;
 
     @ManyToOne

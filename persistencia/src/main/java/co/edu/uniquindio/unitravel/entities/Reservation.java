@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -14,9 +11,11 @@ import java.util.Calendar;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservation implements Serializable {
 
@@ -50,11 +49,12 @@ public class Reservation implements Serializable {
     @Column(nullable = false)
     private int numPeople;
 
-
     @OneToMany(mappedBy = "reservation")
+    @ToString.Exclude
     private List<Reservation_Room> rooms;
 
     @OneToMany(mappedBy = "reservationSeat")
+    @ToString.Exclude
     private List<Reservation_Seat> seats;
 
     @ManyToOne

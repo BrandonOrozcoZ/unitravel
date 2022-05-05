@@ -11,23 +11,26 @@ import java.util.Map;
 @Entity
 @Getter
 @Setter
-@ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString(callSuper = true)
 public class Client extends Person implements Serializable {
 
     @ManyToOne
     private City clientCity;
 
     @OneToMany(mappedBy = "clientUser")
+    @ToString.Exclude
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "client")
+    @ToString.Exclude
     private List<Reservation> reservations;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Hotel> favorites;
 
-    @ToString.Include
     @ElementCollection
     private Map<String, String> telephone;
 

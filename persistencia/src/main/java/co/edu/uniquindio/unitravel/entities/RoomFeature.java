@@ -1,18 +1,17 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class RoomFeature implements Serializable {
 
@@ -25,11 +24,7 @@ public class RoomFeature implements Serializable {
     private String description;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Room> roomsFeatures;
 
-    public RoomFeature(int code, String description, List<Room> roomsFeatures) {
-        this.code = code;
-        this.description = description;
-        this.roomsFeatures = roomsFeatures;
-    }
 }

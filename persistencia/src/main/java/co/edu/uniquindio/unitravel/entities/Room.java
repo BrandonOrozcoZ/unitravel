@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unitravel.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
@@ -11,9 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Room implements Serializable {
 
@@ -31,6 +30,7 @@ public class Room implements Serializable {
     private int capacity;
 
     @OneToMany(mappedBy = "roomPhotos")
+    @ToString.Exclude
     private List<Photo> photos;
 
     @ManyToOne
@@ -38,12 +38,15 @@ public class Room implements Serializable {
     private Hotel hotel;
 
     @ManyToMany(mappedBy = "roomsFeatures")
+    @ToString.Exclude
     private List<RoomFeature> features;
 
     @ManyToMany(mappedBy = "rooms")
+    @ToString.Exclude
     private List<Bed> beds;
 
     @OneToMany(mappedBy = "room")
+    @ToString.Exclude
     private List<Reservation_Room> reservations;
 
     public Room(int number, float price, int capacity, List<Photo> photos, Hotel hotel, List<RoomFeature> features, List<Bed> beds) {
